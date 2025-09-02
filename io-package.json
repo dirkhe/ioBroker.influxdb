@@ -136,12 +136,12 @@
     "compact": true,
     "dependencies": [
       {
-        "js-controller": ">=3.3.0"
+        "js-controller": ">=6.0.11"
       }
     ],
     "globalDependencies": [
       {
-        "admin": ">=5.1.28"
+        "admin": ">=7.6.17"
       }
     ],
     "supportStopInstance": 10000,
@@ -151,7 +151,6 @@
       "Apollon77 <ingo@fischer-ka.de>",
       "Excodibur"
     ],
-    "license": "MIT",
     "readme": "https://github.com/ioBroker/ioBroker.influxdb/blob/master/README.md",
     "icon": "influxdb.png",
     "extIcon": "https://raw.githubusercontent.com/ioBroker/ioBroker.influxdb/master/admin/influxdb.png",
