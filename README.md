@@ -43,6 +43,9 @@ With `Influx 2.x` it is now also possible, to store this metadata-information be
   - This also is valid the other way: Once you start using the Tag-feature in a new database, you cannot switch back to using fields for this database.
 - This feature is currently only available if you use Influx 2.x. And only if you use the new responsive GUI of Admin 5.
 
+### InfluxDB 3.x
+With v3 the new Query language Flkux is deprecated. Tags and Field are further supported, but we can't create, delete Database (buckets in v2). Also the retention time could not change or read. You have to sync this manually between adapter and InfluxDB. 
+
 ### Migration from InfluxDB 1 to 2
 
 Please refer to the [official guides on how to migrate](https://docs.influxdata.com/influxdb/v2.0/upgrade/v1-to-v2/) from InfluxDB 1.x to 2.x. Especially the [migration instructions for time series data](https://docs.influxdata.com/influxdb/v2.0/upgrade/v1-to-v2/manual-upgrade/#migrate-time-series-data) have been verified to work during adapter testing. Please always create a backup of your data before performing the migration.
@@ -76,9 +79,10 @@ Please refer to the official InfluxDB pages for installation instructions depend
 
 * InfluxDB 1.x: https://docs.influxdata.com/influxdb/v1.8/introduction/install/
 * InfluxDB 2.x: https://docs.influxdata.com/influxdb/v2.2/install/
+* InfluxDB 3.x: https://docs.influxdata.com/influxdb3/enterprise/install/
 
 ### Setup authentication for InfluxDB 1.x (optional)
-**NOTE:** Influx DB V2.x relies on organization/token login, instead of username/password! This is only applicable for InfluxDB 1.x
+**NOTE:** Influx DB V2.x relies on organization/token login, instead of username/password! This is only applicable for InfluxDB 1.x Influx DB V3.x uses also only token, organization is optionally
 
 If you use DB locally, you may leave authentication disabled and skip this part.
 
@@ -270,6 +274,9 @@ sendTo('influxdb.0', 'query', 'from(bucket: "iobroker") |> range(start: -3h)', f
 ```
 Two queries:
 **NOTE:** By default, you cannot execute 2 queries at once via Flux-language, as there is no delimiter available. This adapter emulates this behaviour by defining `;` as delimiter, so you can still run two queries in one statement.
+
+### Influx 3.x
+The adapter use internally InfluxQL, so you can use the examples from 1.x
 
 ```javascript
 sendTo('influxdb.0', 'query', 'from(bucket: "iobroker") |> range(start: -3h); from(bucket: "iobroker") |> range(start: -1h)" LIMIT 100', function (result) {
