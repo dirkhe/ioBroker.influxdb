@@ -479,7 +479,9 @@ function connect(adapter) {
         adapter.config.path, // optional, default '/'
         adapter.config.token,
         adapter.config.dbname,
-        adapter.config.requestTimeout
+        adapter.config.requestTimeout,
+        adapter.config.validateSSL,
+        adapter.config.usetags
       );
       break;
     case "2.x":
@@ -571,7 +573,7 @@ function connect(adapter) {
           }
         );
 
-        if (adapter.config.dbversion === "2.x") {
+        if (adapter.config.dbversion !== "1.x") {
           checkMetaDataStorageType(adapter);
         }
       }
@@ -682,13 +684,14 @@ function testConnection(adapter, msg) {
         adapter.log.info("Connecting to InfluxDB 3");
         lClient = new DatabaseInfluxDB3x(
           adapter.log,
-          adapter.config.host,
-          adapter.config.port, // optional, default 8181
-          adapter.config.protocol, // optional, default 'http'
-          adapter.config.path, // optional, default '/'
-          adapter.config.token,
-          adapter.config.dbname,
-          adapter.config.requestTimeout
+          msg.message.config.host,
+          msg.message.config.port,
+          msg.message.config.protocol, // optional, default 'http'
+          msg.message.config.path, // optional, default '/'
+          msg.message.config.token,
+          msg.message.config.dbname || appName,
+          msg.message.config.requestTimeout,
+          msg.message.config.validateSSL
         );
         break;
       case "2.x":

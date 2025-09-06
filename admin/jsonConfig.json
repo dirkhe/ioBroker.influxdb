@@ -163,7 +163,8 @@
           "variant": "outlined",
           "color": "primary",
           "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSIjODAxMTExIiBkPSJNNiAxOWMwIDEuMS45IDIgMiAyaDhjMS4xIDAgMi0uOSAyLTJWN0g2djEyek0xOSA0aC0zLjVsLTEtMWgtNWwtMSAxSDV2MmgxNFY0eiIvPjwvc3ZnPgkJCQkJCQkJ",
-          "disabled": "!_alive",
+          "disabled": "!_alive || data.dbversion === '3.x'",
+          "hidden": "data.dbversion === '3.x'",
           "result": {
             "deleted": "Deleted! Restarting..."
           },
@@ -223,12 +224,13 @@
           "newLine": true,
           "type": "select",
           "label": "retention",
+          "hidden": "data.dbversion === '3.x'",
           "options": [
             {
               "value": 0,
               "label": "keep forever"
             },
-            {
+            { 
               "value": 63072000,
               "label": "2 years"
             },
@@ -363,8 +365,8 @@
             "md": 6,
             "label": "Send health-check pings to database",
             "help": "health-check help",
-            "hidden": "data.dbversion === '1.x'",
-            "disabled": "data.dbversion === '1.x'"
+            "hidden": "data.dbversion !== '2.x'",
+            "disabled": "data.dbversion !== '2.x'"
           }
       }
     }
